@@ -1,18 +1,19 @@
-resource symbolicname 'Microsoft.Subscription/aliases@2024-08-01-preview' = {
-  name: 'string'
+// file: create-ea-subscription.bicep
+targetScope = 'tenant'
+
+@description('Friendly name of the new subscription')
+param subscriptionDisplayName string
+
+@description('EA Enrollment Account GUID (from `az billing enrollment-account list`)')
+param enrollmentAccountName string
+
+resource subAlias 'Microsoft.Subscription/aliases@2024-08-01-preview' = {
+  name: subscriptionDisplayName
   properties: {
-    additionalProperties: {
-      managementGroupId: 'string'
-      subscriptionOwnerId: 'string'
-      subscriptionTenantId: 'string'
-      tags: {
-        {customized property}: 'string'
-      }
-    }
-    billingScope: 'string'
-    displayName: 'string'
-    resellerId: 'string'
-    subscriptionId: 'string'
-    workload: 'string'
+    displayName: subscriptionDisplayName
+    workload: 'Production' // or 'DevTest'
+    billingScope: '/providers/Microsoft.Billing/enrollmentAccounts/${enrollmentAccountName}'
   }
 }
+
+output subscriptionId string = subAlias.properties.subscriptionId
