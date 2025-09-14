@@ -1,13 +1,9 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/subscriptionDeploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/tenantDeploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "subscriptionDisplayName": {
-      "type": "string"
-    },
-    "enrollmentAccountName": {
-      "type": "string"
-    }
+    "subscriptionDisplayName": { "type": "string" },
+    "enrollmentAccountName": { "type": "string" }
   },
   "resources": [
     {
